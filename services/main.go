@@ -31,7 +31,8 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	// mgoDb := db.GetDatabase()
+	// mgoDb := odm.GetDatabaseWithParams(config.GetString("dbURL"),
+	// config.GetString("database"))
 	// orgCollection := db.NewOrgCollection(mgoDb)
 
 	s := grpc.NewServer()

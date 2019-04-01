@@ -4,45 +4,35 @@ import (
 	"context"
 	"log"
 
+	odm "github.com/SaiNageswarS/mongo-odm"
+	"github.com/mongodb/mongo-go-driver/bson"
 	"github.com/mongodb/mongo-go-driver/mongo"
-	"github.com/mongodb/mongo-go-driver/mongo/options"
-	"github.com/mongodb/mongo-go-driver/x/bsonx"
 )
 
-var OrgCollectionName = "org"
-
 type Org struct {
-	Name string //unique
+	odm.DocBase `bson:",inline"`
+	Name        string `odm:unique`
 }
 
 type OrgCollection struct {
-	C *mongo.Collection
+	*mongo.Collection
 }
 
 // NewOrgCollection creates appropriate indexes and returns
 // reference to collection object for Org
-func NewOrgCollection(database *mongo.Database) OrgCollection {
-	c := database.Collection(OrgCollectionName)
+func NewOrgCollection(database *mongo.Database) *OrgCollection {
+	orgCollection := new(OrgCollection)
+	orgCollection.Collection = odm.CreateCollection(database, (*Org)(nil))
 
-	indexView := c.Indexes()
-	_, err := indexView.CreateOne(context.Background(), mongo.IndexModel{
-		Keys:    bsonx.Doc{{"name", bsonx.Int32(1)}},
-		Options: &options.IndexOptions{Unique: &[]bool{true}[0]},
-	})
-	if err != nil {
-		log.Fatal("Error creating unique index", err)
-	}
-
-	return OrgCollection{
-		C: c,
-	}
+	return orgCollection
 }
 
-func (col *OrgCollection) save(org Org) chan interface{} {
+func (col *OrgCollection) Save(org Org) chan interface{} {
 	insertedID := make(chan interface{})
 
 	go func() {
-		insertResult, err := col.C.InsertOne(context.Background(), org)
+		org.PreSave()
+		insertResult, err := col.InsertOne(context.Background(), org)
 		if err != nil {
 			log.Println(err)
 			insertedID <- nil
@@ -52,4 +42,21 @@ func (col *OrgCollection) save(org Org) chan interface{} {
 		close(insertedID)
 	}()
 	return insertedID
+}
+
+//GetOrgByName returns org given name
+func (col *OrgCollection) GetOrgByName(name string) chan Org {
+	orgChan := make(chan Org)
+
+	go func() {
+		var org Org
+		//bson.D{{"name", name}}
+		err := col.FindOne(Ctx(), bson.D{{"name", name}}).Decode(&org)
+		if err != nil {
+			log.Println(err)
+		}
+		orgChan <- org
+		close(orgChan)
+	}()
+	return orgChan
 }
