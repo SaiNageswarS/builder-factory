@@ -5,11 +5,12 @@ import (
 	"fmt"
 	"testing"
 
+	odm "github.com/SaiNageswarS/mongo-odm"
 	. "github.com/smartystreets/goconvey/convey"
 )
 
 func TestOrg(t *testing.T) {
-	mgoDb := GetDatabaseWithParams("mongodb://localhost:27017", "testDB")
+	mgoDb := odm.GetDatabaseWithParams("mongodb://localhost:27017", "testDB")
 	mgoDb.Collection("org").Drop(context.Background())
 	orgCollection := NewOrgCollection(mgoDb)
 

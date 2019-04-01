@@ -2,6 +2,12 @@
 
 
 [[projects]]
+  branch = "master"
+  name = "github.com/SaiNageswarS/mongo-odm"
+  packages = ["."]
+  revision = "779fe84d184d3ff64af86faad5c6daa0d56ee805"
+
+[[projects]]
   name = "github.com/fsnotify/fsnotify"
   packages = ["."]
   revision = "c2828203cd70a50dcccfb2761f8b1f8ceef9a8e9"
@@ -285,6 +291,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "ede977cf5a2f891de9bd91a756786b0668db621bd4ebc753b0a4ec6a34989871"
+  inputs-digest = "3d01891e0a848bc4f8cc91b518857a281e72f6b0883dfc01f59f544cc5f4c571"
   solver-name = "gps-cdcl"
   solver-version = 1

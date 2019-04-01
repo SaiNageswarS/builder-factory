@@ -11,7 +11,7 @@ import (
 
 type Org struct {
 	odm.DocBase `bson:",inline"`
-	Name        string `odm:unique`
+	Name        string `odmIndex:"unique"`
 }
 
 type OrgCollection struct {
@@ -23,7 +23,6 @@ type OrgCollection struct {
 func NewOrgCollection(database *mongo.Database) *OrgCollection {
 	orgCollection := new(OrgCollection)
 	orgCollection.Collection = odm.CreateCollection(database, (*Org)(nil))
-
 	return orgCollection
 }
 
@@ -51,7 +50,7 @@ func (col *OrgCollection) GetOrgByName(name string) chan Org {
 	go func() {
 		var org Org
 		//bson.D{{"name", name}}
-		err := col.FindOne(Ctx(), bson.D{{"name", name}}).Decode(&org)
+		err := col.FindOne(context.Background(), bson.D{{"name", name}}).Decode(&org)
 		if err != nil {
 			log.Println(err)
 		}

@@ -1,22 +1,21 @@
 package db
 
 import (
+	"context"
 	"log"
 
+	odm "github.com/SaiNageswarS/mongo-odm"
 	"github.com/mongodb/mongo-go-driver/mongo"
-	"github.com/mongodb/mongo-go-driver/mongo/options"
-	"github.com/mongodb/mongo-go-driver/x/bsonx"
 )
-
-var AppCollectionName = "app"
 
 // app name is unique in an org
 // Unique index on combination of Name and OrgId
 type App struct {
-	DocBase      `bson:",inline"`
-	Name         string
-	Cloud        string
-	OrgID        interface{}
+	odm.DocBase `bson:",inline"`
+	Name        string
+	Cloud       string
+	//OrgID is indexed
+	OrgID        interface{} `odmIndex:""`
 	AwsAccessKey string
 	AwsSecret    string
 	Description  string
@@ -32,19 +31,7 @@ type AppCollection struct {
 // be injected into other classes
 func NewAppCollection(database *mongo.Database) *AppCollection {
 	appCollection := new(AppCollection)
-	appCollection.Collection = database.Collection(AppCollectionName)
-
-	indexView := appCollection.Indexes()
-	// app name is unique in an org
-	// Unique index on combination of Name and OrgId
-	_, err := indexView.CreateOne(Ctx(), mongo.IndexModel{
-		Keys:    bsonx.Doc{{"name", bsonx.Int32(1)}, {"orgid", bsonx.Int32(1)}},
-		Options: &options.IndexOptions{Unique: &[]bool{true}[0]},
-	})
-	if err != nil {
-		log.Fatal("Error creating unique index", err)
-	}
-
+	appCollection.Collection = odm.CreateCollection(database, (*App)(nil))
 	return appCollection
 }
 
@@ -54,7 +41,7 @@ func (col *AppCollection) Save(app App) chan interface{} {
 
 	go func() {
 		app.PreSave()
-		insertResult, err := col.InsertOne(Ctx(), app)
+		insertResult, err := col.InsertOne(context.Background(), app)
 		if err != nil {
 			log.Println(err)
 			insertedID <- nil
