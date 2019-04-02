@@ -16,7 +16,7 @@ message ApplicationDetails {
 }
 message ApplicationCreateResponse {
   string applicationName = 1;
-  int64 applicationId = 2;
+  string applicationId = 2;
 }
 
 message GetApplicationsRequest {

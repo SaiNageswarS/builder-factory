@@ -2,8 +2,8 @@ export class ApplicationCreateResponse {
   constructor ();
   getApplicationname(): string;
   setApplicationname(a: string): void;
-  getApplicationid(): number;
-  setApplicationid(a: number): void;
+  getApplicationid(): string;
+  setApplicationid(a: string): void;
   toObject(): ApplicationCreateResponse.AsObject;
   serializeBinary(): Uint8Array;
   static deserializeBinary: (bytes: {}) => ApplicationCreateResponse;
@@ -12,7 +12,7 @@ export class ApplicationCreateResponse {
 export namespace ApplicationCreateResponse {
   export type AsObject = {
     Applicationname: string;
-    Applicationid: number;
+    Applicationid: string;
   }
 }
 

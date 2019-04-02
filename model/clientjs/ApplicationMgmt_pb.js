@@ -340,7 +340,7 @@ proto.services.ApplicationCreateResponse.prototype.toObject = function(opt_inclu
 proto.services.ApplicationCreateResponse.toObject = function(includeInstance, msg) {
   var f, obj = {
     applicationname: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    applicationid: jspb.Message.getFieldWithDefault(msg, 2, 0)
+    applicationid: jspb.Message.getFieldWithDefault(msg, 2, "")
   };
 
   if (includeInstance) {
@@ -382,7 +382,7 @@ proto.services.ApplicationCreateResponse.deserializeBinaryFromReader = function(
       msg.setApplicationname(value);
       break;
     case 2:
-      var value = /** @type {number} */ (reader.readInt64());
+      var value = /** @type {string} */ (reader.readString());
       msg.setApplicationid(value);
       break;
     default:
@@ -422,8 +422,8 @@ proto.services.ApplicationCreateResponse.serializeBinaryToWriter = function(mess
     );
   }
   f = message.getApplicationid();
-  if (f !== 0) {
-    writer.writeInt64(
+  if (f.length > 0) {
+    writer.writeString(
       2,
       f
     );
@@ -447,17 +447,17 @@ proto.services.ApplicationCreateResponse.prototype.setApplicationname = function
 
 
 /**
- * optional int64 applicationId = 2;
- * @return {number}
+ * optional string applicationId = 2;
+ * @return {string}
  */
 proto.services.ApplicationCreateResponse.prototype.getApplicationid = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
-/** @param {number} value */
+/** @param {string} value */
 proto.services.ApplicationCreateResponse.prototype.setApplicationid = function(value) {
-  jspb.Message.setProto3IntField(this, 2, value);
+  jspb.Message.setProto3StringField(this, 2, value);
 };
 
 

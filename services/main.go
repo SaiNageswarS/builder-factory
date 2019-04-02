@@ -6,6 +6,7 @@ import (
 	"net"
 	"os"
 
+	pb "github.com/SaiNageswarS/builder-factory/model/services"
 	"github.com/SaiNageswarS/builder-factory/services/controller"
 	"github.com/SaiNageswarS/builder-factory/services/db"
 	config "github.com/spf13/viper"
@@ -36,6 +37,7 @@ func main() {
 	appController := controller.ApplicationMgmtController{mgoDb}
 
 	s := grpc.NewServer()
+	pb.RegisterApplicationMgmtServer(s, &appController)
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}

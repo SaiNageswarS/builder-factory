@@ -38,6 +38,12 @@
   version = "v0.0.1"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/gopherjs/gopherjs"
+  packages = ["js"]
+  revision = "bb2674552d8fc183605e16acbf9e8f0a0b031dee"
+
+[[projects]]
   name = "github.com/hashicorp/hcl"
   packages = [
     ".",
@@ -53,6 +59,12 @@
   ]
   revision = "8cb6e5b959231cc1119e43259c4a608f9c51a241"
   version = "v1.0.0"
+
+[[projects]]
+  name = "github.com/jtolds/gls"
+  packages = ["."]
+  revision = "b4936e06046bbecbb94cae9c18127ebe510a2cb9"
+  version = "v4.20"
 
 [[projects]]
   name = "github.com/magiconair/properties"
@@ -108,6 +120,27 @@
   packages = ["."]
   revision = "c01d1270ff3e442a8a57cddc1c92dc1138598194"
   version = "v1.2.0"
+
+[[projects]]
+  name = "github.com/smartystreets/assertions"
+  packages = [
+    ".",
+    "internal/go-diff/diffmatchpatch",
+    "internal/go-render/render",
+    "internal/oglematchers"
+  ]
+  revision = "f487f9de1cd36ebab28235b9373028812fb47cbd"
+  version = "1.10.1"
+
+[[projects]]
+  name = "github.com/smartystreets/goconvey"
+  packages = [
+    "convey",
+    "convey/gotest",
+    "convey/reporting"
+  ]
+  revision = "9e8dc3f972df6c8fcc0375ef492c24d0bb204857"
+  version = "1.6.3"
 
 [[projects]]
   name = "github.com/spf13/afero"
@@ -183,7 +216,7 @@
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix"]
-  revision = "e4093980e83e70784fc393a93d5620e2654097f0"
+  revision = "baf5eb976a8cd65845293cd814ea151018552292"
 
 [[projects]]
   name = "golang.org/x/text"
@@ -259,6 +292,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "1bdb001750645224df64c9a0257c3c524f671efa6a41b9b2e51c9fe3cb6604cb"
+  inputs-digest = "53316dae5519b69b5a663343012dd8c7c2e92333a1269c0e3bfb8aee87d607e9"
   solver-name = "gps-cdcl"
   solver-version = 1

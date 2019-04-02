@@ -16,6 +16,17 @@ type App struct {
 	Description  string
 }
 
+//AppFields provides namespace for filters
+var AppFields = struct {
+	ID             string
+	NAME           string
+	CLOUD          string
+	ORG_ID         string
+	AWS_ACCESS_KEY string
+	AWS_SECRET     string
+	DESCRIPTION    string
+}{"_id", "name", "cloud", "orgid", "awsaccesskey", "awssecret", "description"}
+
 type Org struct {
 	odm.DocBase `bson:",inline"`
 	Name        string `odmIndex:"unique"`
@@ -25,7 +36,7 @@ type Org struct {
 var OrgFields = struct {
 	ID   string
 	NAME string
-}{"ID", "NAME"}
+}{"_id", "name"}
 
 type Db struct {
 	Org odm.Collection
