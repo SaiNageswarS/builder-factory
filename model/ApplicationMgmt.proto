@@ -1,0 +1,28 @@
+syntax = "proto3";
+package services;
+
+service ApplicationMgmt {
+  rpc Create (ApplicationDetails) returns (ApplicationCreateResponse) {}
+  rpc GetAllApplications(GetApplicationsRequest) returns (GetApplicationsResponse) {}
+}
+
+message ApplicationDetails {
+  string applicationName = 1;
+  string orgName = 2;
+  string cloud = 3;
+  string awsAccessKey = 4;
+  string awsSecret = 5;
+  string description = 6;
+}
+message ApplicationCreateResponse {
+  string applicationName = 1;
+  int64 applicationId = 2;
+}
+
+message GetApplicationsRequest {
+  string orgName = 1;
+}
+
+message GetApplicationsResponse {
+  repeated ApplicationDetails applications = 1;
+}

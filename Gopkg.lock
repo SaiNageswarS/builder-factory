@@ -5,7 +5,7 @@
   branch = "master"
   name = "github.com/SaiNageswarS/mongo-odm"
   packages = ["."]
-  revision = "779fe84d184d3ff64af86faad5c6daa0d56ee805"
+  revision = "38032b8c79c9c0c9fd8ec33fda02c6f2d75175de"
 
 [[projects]]
   name = "github.com/fsnotify/fsnotify"
@@ -38,12 +38,6 @@
   version = "v0.0.1"
 
 [[projects]]
-  branch = "master"
-  name = "github.com/gopherjs/gopherjs"
-  packages = ["js"]
-  revision = "bb2674552d8fc183605e16acbf9e8f0a0b031dee"
-
-[[projects]]
   name = "github.com/hashicorp/hcl"
   packages = [
     ".",
@@ -59,12 +53,6 @@
   ]
   revision = "8cb6e5b959231cc1119e43259c4a608f9c51a241"
   version = "v1.0.0"
-
-[[projects]]
-  name = "github.com/jtolds/gls"
-  packages = ["."]
-  revision = "b4936e06046bbecbb94cae9c18127ebe510a2cb9"
-  version = "v4.20"
 
 [[projects]]
   name = "github.com/magiconair/properties"
@@ -120,26 +108,6 @@
   packages = ["."]
   revision = "c01d1270ff3e442a8a57cddc1c92dc1138598194"
   version = "v1.2.0"
-
-[[projects]]
-  name = "github.com/smartystreets/assertions"
-  packages = [
-    ".",
-    "internal/go-render/render",
-    "internal/oglematchers"
-  ]
-  revision = "7678a5452ebea5b7090a6b163f844c133f523da2"
-  version = "1.8.3"
-
-[[projects]]
-  name = "github.com/smartystreets/goconvey"
-  packages = [
-    "convey",
-    "convey/gotest",
-    "convey/reporting"
-  ]
-  revision = "9e8dc3f972df6c8fcc0375ef492c24d0bb204857"
-  version = "1.6.3"
 
 [[projects]]
   name = "github.com/spf13/afero"
@@ -215,7 +183,7 @@
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix"]
-  revision = "9eb1bfa1ce65ae8a6ff3114b0aaf9a41a6cf3560"
+  revision = "e4093980e83e70784fc393a93d5620e2654097f0"
 
 [[projects]]
   name = "golang.org/x/text"
@@ -242,7 +210,7 @@
   branch = "master"
   name = "google.golang.org/genproto"
   packages = ["googleapis/rpc/status"]
-  revision = "d831d65fe17df2e52bcc4316d4a9f7a418701f43"
+  revision = "f467c93bbac2133ff463e1f93d18d8f9f3f04451"
 
 [[projects]]
   name = "google.golang.org/grpc"
@@ -291,6 +259,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "3d01891e0a848bc4f8cc91b518857a281e72f6b0883dfc01f59f544cc5f4c571"
+  inputs-digest = "1bdb001750645224df64c9a0257c3c524f671efa6a41b9b2e51c9fe3cb6604cb"
   solver-name = "gps-cdcl"
   solver-version = 1

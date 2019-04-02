@@ -6,9 +6,10 @@ import (
 	"net"
 	"os"
 
+	"github.com/SaiNageswarS/builder-factory/services/controller"
+	"github.com/SaiNageswarS/builder-factory/services/db"
 	config "github.com/spf13/viper"
 	"google.golang.org/grpc"
-	// "github.com/SaiNageswarS/builder-factory/services/db"
 )
 
 const (
@@ -31,9 +32,8 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	// mgoDb := odm.GetDatabaseWithParams(config.GetString("dbURL"),
-	// config.GetString("database"))
-	// orgCollection := db.NewOrgCollection(mgoDb)
+	mgoDb := db.NewDb()
+	appController := controller.ApplicationMgmtController{mgoDb}
 
 	s := grpc.NewServer()
 	if err := s.Serve(lis); err != nil {

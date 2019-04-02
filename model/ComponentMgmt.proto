@@ -1,0 +1,58 @@
+syntax = "proto3";
+package services;
+
+service ComponentMgmt {
+  rpc Create (ComponentDetail) returns (ComponentCreateResponse) {}
+  rpc GetComponents (GetComponentRequest) returns (GetComponentResponse) {}
+}
+
+message Package {
+  string name = 1;
+  string repoUrl = 2;
+  string language = 3;
+
+  enum RepoProvider {
+    BITBUCKET = 0;
+    GITHUB = 1;
+  }
+
+  RepoProvider repoProvider = 4;
+  string repoWebUrl = 5;
+}
+
+message ComponentDetail {
+  string componentName = 3;
+  string applicationName = 1;
+  enum ComponentType {
+    FRONTEND_WEB = 0;
+    BACKEND_API_REST = 1;
+    BACKEND_API_RPC = 2;
+    SCHEDULED_JOB = 3;
+    WORKFLOW = 4;
+    MAPREDUCE_CLUSTER = 5;
+  }
+  ComponentType componentType = 2;
+  string orgName = 4;
+  Package package = 5;
+
+  enum PipelineState {
+    DEPLOYED = 0;
+    NOT_CONFIGURED = 1;
+    BROKEN = 2;
+  }
+  PipelineState pipelineState = 6;
+}
+
+message ComponentCreateResponse {
+  string componentName = 1;
+  int64 componentId = 2;
+}
+
+message GetComponentRequest {
+  string orgName = 1;
+  string appName = 2;
+}
+
+message GetComponentResponse {
+  repeated ComponentDetail components = 1;
+}
