@@ -31,7 +31,7 @@ func TestApplicationMgmtService(t *testing.T) {
 		Name:    "testOrg",
 	}
 
-	_, err := mgo.Org.Col().InsertOne(context.Background(), org)
+	_, err := mgo.OrgCol.Col().InsertOne(context.Background(), org)
 	log.Printf("error is %v", err)
 
 	Convey("CreateApplication", t, func() {

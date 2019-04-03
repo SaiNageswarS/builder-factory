@@ -39,15 +39,15 @@ var OrgFields = struct {
 }{"_id", "name"}
 
 type Db struct {
-	Org odm.Collection
-	App odm.Collection
+	OrgCol odm.Collection
+	AppCol odm.Collection
 }
 
 func NewDb() Db {
 	dbInstance := odm.GetDatabase(config.GetString("dbURL"),
 		config.GetString("database"))
 	return Db{
-		Org: odm.Collection{Db: dbInstance, Doc: (*Org)(nil)},
-		App: odm.Collection{Db: dbInstance, Doc: (*App)(nil)},
+		OrgCol: odm.Collection{Db: dbInstance, Doc: (*Org)(nil)},
+		AppCol: odm.Collection{Db: dbInstance, Doc: (*App)(nil)},
 	}
 }

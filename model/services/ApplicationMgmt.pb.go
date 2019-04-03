@@ -8,6 +8,8 @@ import (
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
 	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 	math "math"
 )
 
@@ -305,6 +307,17 @@ func (c *applicationMgmtClient) GetAllApplications(ctx context.Context, in *GetA
 type ApplicationMgmtServer interface {
 	Create(context.Context, *ApplicationDetails) (*ApplicationCreateResponse, error)
 	GetAllApplications(context.Context, *GetApplicationsRequest) (*GetApplicationsResponse, error)
+}
+
+// UnimplementedApplicationMgmtServer can be embedded to have forward compatible implementations.
+type UnimplementedApplicationMgmtServer struct {
+}
+
+func (*UnimplementedApplicationMgmtServer) Create(ctx context.Context, req *ApplicationDetails) (*ApplicationCreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (*UnimplementedApplicationMgmtServer) GetAllApplications(ctx context.Context, req *GetApplicationsRequest) (*GetApplicationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllApplications not implemented")
 }
 
 func RegisterApplicationMgmtServer(s *grpc.Server, srv ApplicationMgmtServer) {

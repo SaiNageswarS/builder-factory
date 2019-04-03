@@ -1,4 +1,4 @@
-export GOPATH=~/myWorkspace/autoDevOps
+export GOPATH=/Users/saisatch/myWorkspace/builder-factory
 export PATH=$GOPATH/bin:$PATH
 rm -Rf services
 rm -Rf clientjs

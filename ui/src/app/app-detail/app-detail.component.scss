@@ -1,0 +1,29 @@
+.componentDetail {
+    padding-right: 30px;
+
+    p {
+        display: inline;
+    }
+
+    @mixin dot {
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .green-dot {
+        @include dot;
+        background-color: green;
+    }
+
+    .red-dot {
+        @include dot;
+        background-color: red;
+    }
+
+    .grey-dot {
+        @include dot;
+        background-color: #bbb;
+    }
+}

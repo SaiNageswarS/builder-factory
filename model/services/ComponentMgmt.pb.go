@@ -8,6 +8,8 @@ import (
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
 	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 	math "math"
 )
 
@@ -496,6 +498,17 @@ func (c *componentMgmtClient) GetComponents(ctx context.Context, in *GetComponen
 type ComponentMgmtServer interface {
 	Create(context.Context, *ComponentDetail) (*ComponentCreateResponse, error)
 	GetComponents(context.Context, *GetComponentRequest) (*GetComponentResponse, error)
+}
+
+// UnimplementedComponentMgmtServer can be embedded to have forward compatible implementations.
+type UnimplementedComponentMgmtServer struct {
+}
+
+func (*UnimplementedComponentMgmtServer) Create(ctx context.Context, req *ComponentDetail) (*ComponentCreateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (*UnimplementedComponentMgmtServer) GetComponents(ctx context.Context, req *GetComponentRequest) (*GetComponentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetComponents not implemented")
 }
 
 func RegisterComponentMgmtServer(s *grpc.Server, srv ComponentMgmtServer) {

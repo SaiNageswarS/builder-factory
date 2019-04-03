@@ -4,10 +4,10 @@ import (
 	"context"
 	"log"
 
-	"github.com/mongodb/mongo-go-driver/bson"
 	"github.com/mongodb/mongo-go-driver/bson/primitive"
 
 	pb "github.com/SaiNageswarS/builder-factory/model/services"
+	"github.com/SaiNageswarS/builder-factory/services/dao"
 	"github.com/SaiNageswarS/builder-factory/services/db"
 	odm "github.com/SaiNageswarS/mongo-odm"
 )
@@ -23,15 +23,14 @@ func (s *ApplicationMgmtController) Create(ctx context.Context,
 	in *pb.ApplicationDetails) (*pb.ApplicationCreateResponse, error) {
 	log.Printf("ApplicationMgmtService::Create received %v", in)
 	var org db.Org
-	err := s.Mgo.Org.Col().FindOne(context.Background(),
-		bson.D{{db.OrgFields.NAME, in.OrgName}}).Decode(&org)
+	err := dao.GetOrgByName(s.Mgo, &org, in.OrgName)
 
 	if err != nil {
 		log.Printf("Got err fetching org.\n %v", err)
 		return nil, err
 	}
 
-	res, err := s.Mgo.App.Col().InsertOne(context.Background(),
+	res, err := dao.InsertOneApp(s.Mgo,
 		db.App{
 			DocBase:      *new(odm.DocBase).New(),
 			Name:         in.ApplicationName,
@@ -57,16 +56,14 @@ func (s *ApplicationMgmtController) GetAllApplications(ctx context.Context,
 	log.Printf("ApplicationMgmtService::Get All Applications for %v", in)
 
 	var org db.Org
-	err := s.Mgo.Org.Col().FindOne(context.Background(),
-		bson.D{{db.OrgFields.NAME, in.OrgName}}).Decode(&org)
+	err := dao.GetOrgByName(s.Mgo, &org, in.OrgName)
 
 	if err != nil {
 		log.Printf("Got err fetching org.\n %v", err)
 		return nil, err
 	}
 
-	appsCursor, err := s.Mgo.App.Col().Find(context.Background(),
-		bson.D{{db.AppFields.ORG_ID, org.ID}})
+	appsCursor, err := dao.GetAllAppsForAnOrg(s.Mgo, org.ID)
 
 	if err != nil {
 		log.Printf("Got err fetching apps.\n %v", err)

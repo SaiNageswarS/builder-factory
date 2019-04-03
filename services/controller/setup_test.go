@@ -20,6 +20,6 @@ func setUp() {
 }
 
 func tearDown() {
-	mgo.Org.Col().Drop(context.Background())
-	mgo.App.Col().Drop(context.Background())
+	mgo.OrgCol.Col().Drop(context.Background())
+	mgo.AppCol.Col().Drop(context.Background())
 }
