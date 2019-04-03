@@ -13,12 +13,13 @@ import (
 )
 
 func getApplicationDetailProto(orgName string, appName string) *pb.ApplicationDetails {
-	return &pb.ApplicationDetails{ApplicationName: appName,
-		OrgName:      orgName,
-		Cloud:        "testAws",
-		AwsAccessKey: "tst",
-		AwsSecret:    "test",
-		Description:  "just work",
+	return &pb.ApplicationDetails{
+		ApplicationName: appName,
+		OrgName:         orgName,
+		Cloud:           "testAws",
+		AwsAccessKey:    "tst",
+		AwsSecret:       "test",
+		Description:     "just work",
 	}
 }
 

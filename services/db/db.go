@@ -47,7 +47,7 @@ func NewDb() Db {
 	dbInstance := odm.GetDatabase(config.GetString("dbURL"),
 		config.GetString("database"))
 	return Db{
-		OrgCol: odm.Collection{Db: dbInstance, Doc: (*Org)(nil)},
-		AppCol: odm.Collection{Db: dbInstance, Doc: (*App)(nil)},
+		OrgCol: (&odm.Collection{Db: dbInstance, Doc: (*Org)(nil)}).Init(),
+		AppCol: (&odm.Collection{Db: dbInstance, Doc: (*App)(nil)}).Init(),
 	}
 }
